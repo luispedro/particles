@@ -8,6 +8,7 @@ Welcome to Particles's documentation!
 Contents:
 
 .. toctree::
+   architechture
    :maxdepth: 2
 
 Indices and tables
