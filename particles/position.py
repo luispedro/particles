@@ -20,20 +20,17 @@
 #  THE SOFTWARE.
 
 from __future__ import division
-import ConfigParser
-import optparse
 
-parser = optparse.OptionParser()
-parser.add_option('--config-file', action='store', dest='configfile', default='particles.ini')
-options,args = parser.parse_args()
-config = ConfigParser.ConfigParser()
-config.readfp(file(options.configfile))
+class Position(object):
+    '''
+    pos = Position(x,y)
+    print pos.x, pos.y
 
-tracks = generate_tracks(modelparams)
-video = generate_video(tracks)
-positions = detect_particles(video)
-results = link_tracks(positions)
-statistics = compute_statistics(tracks,results)
+    Represents a 2D position.
+    '''
 
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
 
 # vim: set ts=4 sts=4 sw=4 expandtab smartindent:
