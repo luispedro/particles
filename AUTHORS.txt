@@ -1,1 +1,3 @@
-Luís Pedro Coelho (lpc@cmu.edu): Project co-ordinator
+﻿Luís Pedro Coelho (lpc@cmu.edu): Project co-ordinator
+
+Peng Liu (liupengal@gmail.com): Object detection 
