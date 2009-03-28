@@ -22,6 +22,8 @@
 from __future__ import division
 import ConfigParser
 import optparse
+import numpy as np
+import random
 
 parser = optparse.OptionParser()
 parser.add_option('--config-file', action='store', dest='configfile', default='particles.ini')
@@ -29,7 +31,17 @@ options,args = parser.parse_args()
 config = ConfigParser.ConfigParser()
 config.readfp(file(options.configfile))
 
-tracks = generate_tracks(modelparams)
+generalconfig = dict(config.items('General'))
+if 'seed' in generalconfig:
+    random.seed(int(generalconfig['seed']))
+    np.random.seed(int(generalconfig['seed']))
+
+if 'save-video' in generalconfig and generalconfig['save-video'] not in ('False','false','None'):
+    import sys
+    print >>sys.stderr, 'save-video option not implemented!'
+    sys.exit(1)
+
+tracks = generate_tracks(config.items('Generation'))
 video = generate_video(tracks)
 positions = detect_particles(video)
 results = link_tracks(positions)
