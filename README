@@ -11,6 +11,6 @@ Download from the homepage (http://code.google.com/p/particles/).
 
 You can either (1) just use the files in-place or (2) run the standard:
 
-python setup.py install.py
+python setup.py install
 
 
