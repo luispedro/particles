@@ -1,4 +1,5 @@
-﻿Luís Pedro Coelho (lpc@cmu.edu): Project co-ordinator
+Luís Pedro Coelho (lpc@cmu.edu): Project co-ordinator
 
 John Sekar(sjaprakash@gmail.com): Object Position Generator
 Peng Liu (liupengal@gmail.com): Object detection 
+Andrej Savol(andrejsavol@gmail.com): Object Tracking
