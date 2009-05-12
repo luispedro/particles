@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: munkres
+Version: 1.0.5.2
+Summary: munkres algorithm for the Assignment Problem
+Home-page: http://www.clapper.org/software/python/munkres/
+Author: Brian Clapper
+Author-email: bmc@clapper.org
+License: BSD-style license
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
