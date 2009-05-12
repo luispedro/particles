@@ -1,3 +1,6 @@
+      This product includes software developed by Brian M. Clapper
+      (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
+      copyright © 2008 Brian M. Clapper.
 import  numpy as np
 import  random
 import  math
