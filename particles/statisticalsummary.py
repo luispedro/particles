@@ -1,4 +1,4 @@
-import position as ps
+#import position as ps
 import numpy as np
 import math 
 
@@ -25,7 +25,7 @@ def traj_vel(trajectory):
     for i in xrange(len(trajectory)):
         Vel_vector = [] # holds the velocity of each particle
         for j in xrange(len(trajectory[i][1])-1):
-            Vel_vector.append(velocity(ps.Position(trajectory[i][1][j][0],trajectory[i][1][j][1]),ps.Position(trajectory[i][1][j+1][0],trajectory[i][1][j+1][1]),delta_t))
+            Vel_vector.append(velocity(trajectory[i][1][j],trajectory[i][1][j+1],delta_t))
         Ave_Vel_vector.append(sum(Vel_vector)/len(Vel_vector))
     
     return sum(Ave_Vel_vector)/len(Ave_Vel_vector)
