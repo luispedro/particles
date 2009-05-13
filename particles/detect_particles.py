@@ -1,33 +1,55 @@
-# -*- coding: utf-8 -*-
-# Copyright (C) 2009 Particle Authors (see AUTHORS.txt)
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-#  of this software and associated documentation files (the "Software"), to deal
-#  in the Software without restriction, including without limitation the rights
-#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#  copies of the Software, and to permit persons to whom the Software is
-#  furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in
-#  all copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#  THE SOFTWARE.
-import position
-import numpy
+import otsu as ot
+import position as ps
+import numpy as np
+
 def detect_particles(video):
-    vd = video
+    '''
+    this function was used to detect the position of particles. 
+    otsu method is used to calculate the threshold and the the 
+    coordinates of the particles will be calculated.
+    
+    It can be tested with following code:
+    import detect_particles as dp
+    import numpy as np
+    A = np.array([[
+                    [1,0,1,0,4,5],
+                    [7,1,3,1,5,1],
+                    [1,5,1,4,0,1],
+                    [0,1,8,1,4,7],
+                    [3,2,4,5,2,0],
+                    [1,5,1,4,0,1]],
+                    [[0,1,3,1,5,9],
+                    [1,0,1,4,0,9],
+                    [0,2,0,0,2,9],
+                    [1,0,1,0,4,5],
+                    [1,0,1,4,0,9],
+                    [0,1,0,1,4,7]]])
+    dp.detect_particles(A)
+    '''
     positions = []
-    for var in range(vd.shape(3)):
-        image = vd[:,:,var]
-        
-        
-        
-        pos = position()
+    for i in range(video.shape[0]):
+        pos = ps.Position(0,0)
+        count = 0
+        slice = video[i]
+        threshold = ot.otsu(video[i])
+        for j in range(video.shape[1]):
+            for k in range(video.shape[2]):
+                if (slice[j,k] < threshold):
+                    slice[j,k] = 0
+                else:
+                    slice[j,k] = 1
+                    pos.x += j
+                    pos.y += k
+                    count += 1
+
+        pos.x /= count
+        pos.y /= count
         positions.append(pos)
+
+##        print threshold
+##        print slice
+##        print pos.x
+##        print pos.y
+##        print count
     return positions
+
