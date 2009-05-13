@@ -28,3 +28,9 @@ def statistics(tracks):
     for i in range(Nvelocities):
         sum += Result[i]
     return sum/NVelocities
+
+def compute_statistics(original, computed):
+    original = statistics(original)
+    computed = statistics(computed)
+    return original, computed
+
