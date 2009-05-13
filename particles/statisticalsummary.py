@@ -1,4 +1,3 @@
-import particles
 import position as ps
 import math 
 
@@ -22,7 +21,7 @@ def traj_vel(trajectory):
     Nparticles = 0 # number of particles
     threshold = 1.0e-5 # criterion for equality
     t0 = trajectory[0]
-    for i in xrange(0,len(trajecotry),3):
+    for i in xrange(0,len(trajectory),3):
         if trajectory[i]-t0 < threshold : 
             Nparticles += 1 
         else:
@@ -39,7 +38,7 @@ def traj_vel(trajectory):
 #velocities of all particles in a delta t time span is arragned to form a vector, and these vectors are linearly binded to form the Vel_vector
 
     Vel_vector = [] # velocity vector
-    for i in xrange(0,len(trajecotry)-1,Nparticles):
+    for i in xrange(0,len(trajectory)-1,Nparticles):
         for j in xrange(0,Nparticles,3):
             Vel_vector.append(ps.Position(trajectory[i+j+1],trajectory[i+j+2]),ps.Position(trajectory[i+Nparticles+j+1],trajectory[i+Nparticles+j+2]),trajectory[i+j],trajectory[i+Nparticles])
     
@@ -62,5 +61,7 @@ def compute_statistics(simulated,predicted):
     simulated trajctory and predicted trajactory
     It will call function traj_vel and return two average velocities.
     '''
-    return traj_vel(simulated,predicted)
+    simulated = traj_vel(simulated)
+    predicted = traj_vel(predicted)
+    return simulated, predicted
     
