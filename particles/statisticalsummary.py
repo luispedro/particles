@@ -24,8 +24,11 @@ def traj_vel(trajectory):
     Ave_Vel_vector = [] # holds the average velocity for all paritles
     for i in xrange(len(trajectory)):
         Vel_vector = [] # holds the velocity of each particle
-        for j in xrange(len(trajectory[i][1])-1):
-            Vel_vector.append(velocity(trajectory[i][1][j],trajectory[i][1][j+1],delta_t))
+        if len(trajectory[i][1])<=1: # particle only shows up once
+            Vel_vector.append(0)
+        else:
+            for j in xrange(len(trajectory[i][1])-1):
+                Vel_vector.append(velocity(trajectory[i][1][j],trajectory[i][1][j+1],delta_t))
         Ave_Vel_vector.append(sum(Vel_vector)/len(Vel_vector))
     
     return sum(Ave_Vel_vector)/len(Ave_Vel_vector)
