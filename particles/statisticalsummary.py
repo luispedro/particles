@@ -1,14 +1,14 @@
 import position as ps
 import math 
 
-def velocity(pos1,pos2,t1,t2):
+def velocity(pos1,pos2,delta_t):
     '''
     This is a function used to calculate the mean velocity as a particle moves from position1 to
     position2.
     This fun requires four paramenters, position1, position2, time1 and time2. 
     '''
     distance = math.sqrt((pos1.x - pos2.x)**2+(pos1.y - pos2.y)**2)
-    return distance/abs(t2-t1)
+    return distance/delta_t
 
 def traj_vel(trajectory):
     '''
@@ -17,43 +17,17 @@ def traj_vel(trajectory):
     It requires input of the trajectory from trackgeneration.py.
     It will return the average velocity.
     '''
-# figure out how many particles are in the system
-    Nparticles = 0 # number of particles
-    threshold = 1.0e-5 # criterion for equality
-    t0 = trajectory[0]
-    for i in xrange(0,len(trajectory),3):
-        if trajectory[i]-t0 < threshold : 
-            Nparticles += 1 
-        else:
-            break
-# calculate the velocity average
-    try:
-        len(trajectory)%Nparticles == 0
-    except:
-        print "trajectory impaired" 
 
-    Nframes = len(trajectory)/Nparticles
-
-#velocity vector contains the time evolution of velocities of all particles
-#velocities of all particles in a delta t time span is arragned to form a vector, and these vectors are linearly binded to form the Vel_vector
-
-    Vel_vector = [] # velocity vector
-    for i in xrange(0,len(trajectory)-1,Nparticles):
-        for j in xrange(0,Nparticles,3):
-            Vel_vector.append(ps.Position(trajectory[i+j+1],trajectory[i+j+2]),ps.Position(trajectory[i+Nparticles+j+1],trajectory[i+Nparticles+j+2]),trajectory[i+j],trajectory[i+Nparticles])
+    delta_t = 1 # assume the time difference between frames is 1
+    Nframes = len(trajectory)
+    Ave_Vel_vector = [] # holds the average velocity for all paritles
+    for i in xrange(len(trajectory)):
+        Vel_vector = [] # holds the velocity of each particle
+        for j in xrange(len(trajectory[i][1])-1):
+            Vel_vector.append(velocity(ps.Position(trajectory[i][1][j][0],trajectory[i][1][j][1]),velocity(ps.Position(trajectory[i][1][j+1][0],trajectory[i][1][j+1][1]),delta_t)
+        Ave_Vel_vector.append(sum(Vel_vector)/len(Vel_vector))
     
-# Vel_sum contains the average velocity for each partical 
-    Vel_sum = []
-    for i in xrange(Nparticles):
-        sum = 0 
-        for j in xrange(0,len(Vel_vector),Nparticles):
-            sum += Vel_vector[i+j]
-        Vel_sum.append(sum)
-    
-    sum = 0
-    for i in xrange(len(Vel_sum)):
-        sum += Vel_sum[i]
-    return sum/len(Vel_sum)
+    return sum(Ave_Vel_vector/len(Ave_Vel_vector)
 
 def compute_statistics(simulated,predicted):
     '''
