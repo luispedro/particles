@@ -1,4 +1,5 @@
 import position as ps
+import numpy as np
 import math 
 
 def velocity(pos1,pos2,delta_t):
