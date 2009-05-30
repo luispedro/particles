@@ -36,7 +36,7 @@ The argument for a special class to represent a position (instead of a simple tu
 
 *video* will be a simple numpy 3-D array (2-D images + time) of uint8 numbers.
 
-*positions* will simply be a list of lists of positions.
+*positions* will simply be a list of lists of positions (objects of type class Position).
 
 *results* should have the same form as *tracks*.
 
